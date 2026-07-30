@@ -59,6 +59,25 @@ export default function ToursPage() {
               Enquire about tours
             </Link>
           </div>
+
+          {/* Custom itinerary */}
+          <div className="mt-6 flex flex-col items-start justify-between gap-4 rounded-2xl border border-brand-100 bg-white p-6 sm:flex-row sm:items-center">
+            <div>
+              <p className="text-base font-semibold text-brand-900">
+                Want something bespoke?
+              </p>
+              <p className="mt-1 text-sm text-brand-500">
+                Tell us your ideas and we&apos;ll design a personalized itinerary
+                around you.
+              </p>
+            </div>
+            <Link
+              href="/tour-enquiry"
+              className="inline-flex shrink-0 items-center justify-center rounded-full border border-brand-300 px-5 py-3 text-sm font-semibold text-brand-800 transition-colors hover:bg-brand-50"
+            >
+              Plan a custom tour
+            </Link>
+          </div>
         </div>
       </section>
     </>

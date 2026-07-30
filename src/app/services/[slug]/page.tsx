@@ -111,6 +111,15 @@ export default async function ServicePage({
                   </Link>
                 )}
 
+                {slug === "visa-assistance" && (
+                  <Link
+                    href="/visa-enquiry"
+                    className="inline-flex items-center justify-center rounded-full border border-brand-200 px-5 py-3 text-sm font-semibold text-brand-800 transition-colors hover:bg-brand-50"
+                  >
+                    UK / US / Schengen visa enquiry
+                  </Link>
+                )}
+
                 <a
                   href={whatsappLink(
                     `Hello AGIL Travels, I'd like help with ${service.title}.`,
