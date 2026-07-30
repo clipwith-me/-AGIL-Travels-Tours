@@ -8,13 +8,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
     "/about",
+    "/visa",
+    "/uae-visa",
+    "/visa-enquiry",
+    "/hotels",
     "/tours",
     "/transport",
     "/faq",
     "/enquiry",
-    "/visa-enquiry",
     "/tour-enquiry",
-    "/uae-visa",
   ];
 
   const serviceRoutes = services.map((s) => `/services/${s.slug}`);

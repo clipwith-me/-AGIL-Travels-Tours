@@ -1,18 +1,25 @@
 "use client";
 
 import { useState } from "react";
-import { VISA_COUNTRIES, VISA_TYPES } from "@/lib/enquiry-options";
+import { VISA_TYPES } from "@/lib/enquiry-options";
+import { COUNTRIES, UAE } from "@/lib/countries";
 
 const labelClass = "block text-sm font-medium text-brand-800";
 const fieldClass =
   "mt-1.5 w-full rounded-lg border border-brand-200 bg-white px-3.5 py-2.5 text-sm text-brand-900 outline-none transition-colors placeholder:text-brand-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20";
 
-export function VisaEnquiryForm() {
-  const [country, setCountry] = useState<string>(VISA_COUNTRIES[0]);
+// UAE has its own full application portal, so it's not an enquiry option here.
+const COUNTRY_OPTIONS = COUNTRIES.filter((c) => c !== UAE);
+
+export function VisaEnquiryForm({ initialCountry = "" }: { initialCountry?: string }) {
+  const [country, setCountry] = useState<string>(
+    COUNTRY_OPTIONS.includes(initialCountry) ? initialCountry : "",
+  );
   const [visaType, setVisaType] = useState<string>(VISA_TYPES[0]);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [nationality, setNationality] = useState("");
   const [message, setMessage] = useState("");
 
   const [submitting, setSubmitting] = useState(false);
@@ -23,6 +30,10 @@ export function VisaEnquiryForm() {
     e.preventDefault();
     setError(null);
 
+    if (!country) {
+      setError("Please choose the country you're applying to.");
+      return;
+    }
     if (fullName.trim().length < 2 || !email.trim() || phone.trim().length < 6) {
       setError("Please fill in your name, email, and contact number.");
       return;
@@ -33,7 +44,7 @@ export function VisaEnquiryForm() {
       const res = await fetch("/api/visa-enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ country, visaType, fullName, email, phone, message }),
+        body: JSON.stringify({ country, visaType, fullName, email, phone, nationality, message }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -84,8 +95,12 @@ export function VisaEnquiryForm() {
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             className={fieldClass}
+            required
           >
-            {VISA_COUNTRIES.map((c) => (
+            <option value="" disabled>
+              Select a country…
+            </option>
+            {COUNTRY_OPTIONS.map((c) => (
               <option key={c} value={c}>
                 {c}
               </option>
@@ -143,7 +158,7 @@ export function VisaEnquiryForm() {
         </div>
         <div>
           <label htmlFor="phone" className={labelClass}>
-            Contact number <span className="text-gold-600">*</span>
+            Mobile number <span className="text-gold-600">*</span>
           </label>
           <input
             id="phone"
@@ -155,6 +170,28 @@ export function VisaEnquiryForm() {
             required
           />
         </div>
+      </div>
+
+      <div>
+        <label htmlFor="nationality" className={labelClass}>
+          Nationality <span className="text-gold-600">*</span>
+        </label>
+        <select
+          id="nationality"
+          value={nationality}
+          onChange={(e) => setNationality(e.target.value)}
+          className={fieldClass}
+          required
+        >
+          <option value="" disabled>
+            Select your nationality…
+          </option>
+          {COUNTRIES.map((c) => (
+            <option key={c} value={c}>
+              {c}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>

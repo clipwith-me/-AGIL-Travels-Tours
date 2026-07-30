@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { BUDGET_RANGES, VISA_COUNTRIES, VISA_TYPES } from "./enquiry-options";
+import { BUDGET_RANGES, VISA_TYPES } from "./enquiry-options";
 
 /**
  * Zod schemas for the enquiry forms. Shared by the client forms (optional
@@ -13,11 +13,12 @@ const phone = z
   .max(30);
 
 export const visaEnquirySchema = z.object({
-  country: z.enum(VISA_COUNTRIES),
+  country: z.string().trim().min(2, "Please choose a country.").max(80),
   visaType: z.enum(VISA_TYPES),
   fullName: z.string().trim().min(2, "Please enter your full name.").max(120),
   email: z.string().trim().email("Please enter a valid email address."),
   phone,
+  nationality: z.string().trim().max(80).optional().or(z.literal("")),
   message: z.string().trim().max(2000).optional().or(z.literal("")),
 });
 
@@ -82,3 +83,23 @@ export const visaApplicationSchema = z.object({
 });
 
 export type VisaApplicationInput = z.infer<typeof visaApplicationSchema>;
+
+const optionalCount = z.coerce.number().int().min(0).max(50).optional();
+
+export const hotelEnquirySchema = z.object({
+  country: z.string().trim().min(2, "Please choose a country.").max(80),
+  city: z.string().trim().min(1, "Please enter a city.").max(80),
+  checkIn: z.string().trim().max(20).optional().or(z.literal("")),
+  checkOut: z.string().trim().max(20).optional().or(z.literal("")),
+  rooms: optionalCount,
+  adults: optionalCount,
+  children: optionalCount,
+  starRating: z.string().trim().max(20).optional().or(z.literal("")),
+  hotelName: z.string().trim().max(120).optional().or(z.literal("")),
+  fullName: z.string().trim().min(2, "Please enter your full name.").max(120),
+  email: z.string().trim().email("Please enter a valid email address."),
+  phone,
+  notes: z.string().trim().max(2000).optional().or(z.literal("")),
+});
+
+export type HotelEnquiryInput = z.infer<typeof hotelEnquirySchema>;

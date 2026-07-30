@@ -95,7 +95,8 @@ export const services: Service[] = [
     title: "Visa Assistance",
     blurb:
       "End-to-end support for UAE and international visas — eligibility checks, document guidance, and application handling from start to approval.",
-    funnel: "whatsapp",
+    funnel: "catalogue",
+    href: "/visa",
     icon: VisaIcon,
   },
   {
@@ -108,10 +109,11 @@ export const services: Service[] = [
   },
   {
     slug: "hotel-reservations",
-    title: "Hotel Reservations",
+    title: "Hotel & Apartment Rentals",
     blurb:
-      "Hand-picked hotels and stays across the Emirates to match your trip — from value to premium, booked and confirmed for you.",
-    funnel: "whatsapp",
+      "Hand-picked hotels and apartments across the Emirates and beyond to match your trip — tell us your dates and we'll find your stay.",
+    funnel: "catalogue",
+    href: "/hotels",
     icon: HotelIcon,
   },
   {
@@ -120,7 +122,7 @@ export const services: Service[] = [
     blurb:
       "Airport transfers, private car hire, city tours, and limousine service — safe, reliable ground transport throughout your stay.",
     funnel: "catalogue",
-    href: "/#services", // TODO: /transport (Week 1–2)
+    href: "/transport",
     icon: TransferIcon,
   },
   {
@@ -129,7 +131,7 @@ export const services: Service[] = [
     blurb:
       "Desert safaris, landmarks, theme parks, cruises and more — curated experiences across the UAE with clear pricing.",
     funnel: "catalogue",
-    href: "/#services", // TODO: /tours (Week 1–2)
+    href: "/tours",
     icon: TourIcon,
   },
   {

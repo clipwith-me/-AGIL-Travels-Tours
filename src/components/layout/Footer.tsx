@@ -25,7 +25,7 @@ export function Footer() {
             {services.map((s) => (
               <li key={s.slug}>
                 <Link
-                  href={`/services/${s.slug}`}
+                  href={s.href ?? `/services/${s.slug}`}
                   className="text-brand-200 transition-colors hover:text-white"
                 >
                   {s.title}
@@ -51,6 +51,14 @@ export function Footer() {
                 </Link>
               </li>
             ))}
+            <li>
+              <Link
+                href="/tour-enquiry"
+                className="text-brand-200 transition-colors hover:text-white"
+              >
+                Personalised travel
+              </Link>
+            </li>
           </ul>
         </div>
 

@@ -4,7 +4,7 @@ import { services, type Service } from "@/lib/services";
 function ServiceCard({ service }: { service: Service }) {
   return (
     <Link
-      href={`/services/${service.slug}`}
+      href={service.href ?? `/services/${service.slug}`}
       className="group flex flex-col rounded-2xl border border-brand-100 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-md"
     >
       <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand-800 group-hover:text-gold-400">
