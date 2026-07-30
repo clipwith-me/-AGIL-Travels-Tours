@@ -50,3 +50,35 @@ export const createPaymentSchema = z.object({
 });
 
 export type CreatePaymentBody = z.infer<typeof createPaymentSchema>;
+
+const DOC_TYPES = [
+  "passport_data_page",
+  "passport_photo",
+  "flight_ticket",
+  "proof_of_accommodation",
+  "bank_statement",
+  "other",
+] as const;
+
+export const visaApplicationSchema = z.object({
+  visaType: z.enum(["96hrs", "30-day", "60-day"]),
+  fullName: z.string().trim().min(2, "Please enter your full name.").max(120),
+  email: z.string().trim().email("Please enter a valid email address."),
+  phone: z.string().trim().min(6, "Please enter a valid contact number.").max(30),
+  nationality: z.string().trim().max(80).optional().or(z.literal("")),
+  passportNumber: z.string().trim().max(40).optional().or(z.literal("")),
+  dateOfBirth: z.string().trim().max(20).optional().or(z.literal("")),
+  travelDate: z.string().trim().max(20).optional().or(z.literal("")),
+  notes: z.string().trim().max(2000).optional().or(z.literal("")),
+  documents: z
+    .array(
+      z.object({
+        docType: z.enum(DOC_TYPES),
+        fileName: z.string().trim().min(1).max(200),
+      }),
+    )
+    .min(1, "At least one document is required.")
+    .max(12),
+});
+
+export type VisaApplicationInput = z.infer<typeof visaApplicationSchema>;

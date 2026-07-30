@@ -112,12 +112,20 @@ export default async function ServicePage({
                 )}
 
                 {slug === "visa-assistance" && (
-                  <Link
-                    href="/visa-enquiry"
-                    className="inline-flex items-center justify-center rounded-full border border-brand-200 px-5 py-3 text-sm font-semibold text-brand-800 transition-colors hover:bg-brand-50"
-                  >
-                    UK / US / Schengen visa enquiry
-                  </Link>
+                  <>
+                    <Link
+                      href="/uae-visa"
+                      className="inline-flex items-center justify-center rounded-full bg-brand-800 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-700"
+                    >
+                      Apply for a UAE visa
+                    </Link>
+                    <Link
+                      href="/visa-enquiry"
+                      className="inline-flex items-center justify-center rounded-full border border-brand-200 px-5 py-3 text-sm font-semibold text-brand-800 transition-colors hover:bg-brand-50"
+                    >
+                      UK / US / Schengen visa enquiry
+                    </Link>
+                  </>
                 )}
 
                 <a
