@@ -1,7 +1,6 @@
 # AGIL Travels and Tours — New Website Build (From Scratch)
 
 ## Project Overview
-
 UAE-focused travel agency site serving Nigerian/African travellers, tagline
 "Your Safety Is Our First Priority." Six service lines: Visa Assistance, Flight
 Ticket Booking, Hotel Reservations, Transportation & Transfers, Tour & Excursion
@@ -29,7 +28,6 @@ gbeleyiinvestmentlimited@gmail.com (primary reply channel), cc'd on
 Agilvisa1@gmail.com and Ceoagil@outlook.com.
 
 ## MANDATORY: Recreate Everything From the Reference Site
-
 The client wants all functionality from the old site rebuilt fresh in the new
 one, plus the new features below. This is an agency engagement — nothing the
 client currently has should be missing from the new build. Confirmed present
@@ -55,7 +53,6 @@ If something on the reference site isn't listed above, don't assume it's
 out of scope — ask the user rather than silently dropping it.
 
 ## Confirmed Content Captured During Audit (PARTIAL — not the full catalogue)
-
 These are exact items directly observed on the reference site during the audit.
 Use as real seed data and as a style/format reference for the rest — do NOT
 invent the remaining ~35 tours or fill gaps with fabricated content. The client
@@ -65,7 +62,6 @@ pause and ask the user rather than generating placeholder tours as if real.
 
 **Tours confirmed (category: mixed, 6 categories total exist — Desert Safari,
 Landmarks, Theme Parks, Cruises, Adventure, Nature & Wildlife):**
-
 - Classic Desert Safari — $55 — "4x4 dune bashing, camel ride, BBQ dinner,
   Tanoura, Belly & Fire shows at a Bedouin camp" — 6 hours (afternoon–night)
 - Premium Desert Safari (exact name unconfirmed) — $95 — VIP-tier version,
@@ -77,7 +73,6 @@ Landmarks, Theme Parks, Cruises, Adventure, Nature & Wildlife):**
   details not captured
 
 **Transport services confirmed (4 total):**
-
 - Airport Transfers — has a full detail page with itinerary + FAQ sections
 - City Tours
 - Private Car Hire
@@ -86,6 +81,7 @@ Landmarks, Theme Parks, Cruises, Adventure, Nature & Wildlife):**
 **Booking modal format observed** (for Tours "Book Now"): shows price, full
 name field, optional email, start/end date, number of travellers, pickup/hotel
 details field — useful as a UI/UX reference for the new booking form.
+
 
 The reference site has a routing bug worth learning from: every service/detail
 route (e.g. `/services/tours`, `/transport/airport-transfers`) 404s on direct
@@ -104,30 +100,27 @@ payment but never confirms anything afterward; don't repeat that.
 
 ## Feature Priorities (CORE = must ship in 3 weeks)
 
-| Feature                                                                                               | Priority                                                                                                       | Week |
-| ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ---- |
-| Full site build, all 7 pages — content/features per "Recreate Everything" above                       | CORE                                                                                                           | 1    |
-| Correct routing/deployment config from the start (see pitfall above)                                  | CORE                                                                                                           | 1    |
-| FAQ page (categorised: Visa, Flights, Hotels, Tours, Payments, General)                               | CORE                                                                                                           | 1    |
-| Enquiry form + budget-range field (WhatsApp funnel)                                                   | CORE                                                                                                           | 1    |
-| Stripe + Ziina payment, both live                                                                     | CORE                                                                                                           | 1–2  |
-| UAE visa application form + document upload + email confirmation (full flow — see Visa Flow section)  | CORE                                                                                                           | 2    |
-| Simple enquiry form for UK/US/Schengen/other country visas (see Visa Flow section)                    | CORE                                                                                                           | 1–2  |
-| Staff status dashboard (Approve/Decline/Under Review for UAE applications + auto-email)               | CORE                                                                                                           | 2    |
-| Tour enquiry page for personalized/custom itineraries (separate from the fixed-price Tours catalogue) | CORE                                                                                                           | 1    |
-| Tours/Transport booking confirmation (reference number + email, same system as visa portal)           | CORE                                                                                                           | 2    |
-| Public applicant status-tracking page (reference number + email lookup)                               | NICE-TO-HAVE — only build if time allows in Week 3                                                             | —    |
-| Third-party ticketing API integration (Rathin API — see section below)                                | Docs received; credentials (ClientId/Secret + domain) still needed from client before building the integration | —    |
+| Feature | Priority | Week |
+|---|---|---|
+| Full site build, all 7 pages — content/features per "Recreate Everything" above | CORE | 1 |
+| Correct routing/deployment config from the start (see pitfall above) | CORE | 1 |
+| FAQ page (categorised: Visa, Flights, Hotels, Tours, Payments, General) | CORE | 1 |
+| Enquiry form + budget-range field (WhatsApp funnel) | CORE | 1 |
+| Stripe + Ziina payment, both live | CORE | 1–2 |
+| UAE visa application form + document upload + email confirmation (full flow — see Visa Flow section) | CORE | 2 |
+| Simple enquiry form for UK/US/Schengen/other country visas (see Visa Flow section) | CORE | 1–2 |
+| Staff status dashboard (Approve/Decline/Under Review for UAE applications + auto-email) | CORE | 2 |
+| Tour enquiry page for personalized/custom itineraries (separate from the fixed-price Tours catalogue) | CORE | 1 |
+| Tours/Transport booking confirmation (reference number + email, same system as visa portal) | CORE | 2 |
+| Public applicant status-tracking page (reference number + email lookup) | NICE-TO-HAVE — only build if time allows in Week 3 | — |
+| Third-party ticketing API integration (Rathin API — see section below) | Docs received; credentials (ClientId/Secret + domain) still needed from client before building the integration | — |
 
 ## Visa Flow — TWO TIERS (confirmed by client)
-
 The client clarified this is NOT one uniform flow for all countries. There are
 two distinct paths:
 
 ### Tier 1 — UAE Visa: Full Application Flow (VFS Global–style)
-
 This is the "real" application portal with document upload and status tracking.
-
 1. Applicant selects UAE visa type (96hrs / 30-day / 60-day — see checklist
    below), fills personal + travel details
 2. Applicant uploads required documents per the checklist below
@@ -139,8 +132,7 @@ This is the "real" application portal with document upload and status tracking.
 
 **UAE visa document checklists (client-provided, exact — use as-is):**
 
-_96hrs Visa:_
-
+*96hrs Visa:*
 - Passport data page (minimum 6 months validity)
 - Passport photo, white background
 - Confirmed Emirates flight ticket
@@ -149,16 +141,14 @@ _96hrs Visa:_
   USD 10,000 held for each of the last 6 months
 - Note: some nationalities may require additional documents (e.g. national ID)
 
-_30-Day Visit Visa:_
-
+*30-Day Visit Visa:*
 - Passport data page (minimum 6 months validity)
 - Passport photo, white background
 - Flight ticket
 - Proof of accommodation
 - Note: some nationalities may require additional documents
 
-_60-Day Visit Visa:_
-
+*60-Day Visit Visa:*
 - Passport data page (minimum 6 months validity)
 - Passport photo, white background
 - Flight ticket
@@ -169,7 +159,6 @@ For any other UAE visa type not listed above, the form should route the
 customer to a general enquiry instead of a fixed checklist.
 
 ### Tier 2 — UK / US / Schengen / Other Countries: Simple Enquiry Form
-
 NOT a document-upload flow. Client explicitly asked for a lightweight enquiry
 form, sent as a reference screenshot: country dropdown, Name, Email, Contact
 Number, Visa Type dropdown, and an "Apply Now" submit button, plus a footer
@@ -182,7 +171,6 @@ gray info cards below the form) as a UI/UX starting point, restyled to match
 the new AGIL brand rather than copied verbatim.
 
 ## Tour Enquiry Page (NEW — client requested)
-
 Separate from the fixed-price Tours catalogue (the "Book Now" flow with
 pre-set tours/prices). This is for customers who want a custom/personalized
 itinerary instead of picking from the catalogue. Should route to the same
@@ -190,7 +178,44 @@ kind of enquiry/backend + follow-up pattern as Tier 2 visas above, not the
 instant-booking flow. Confirm with client whether this is a standalone page
 or a form embedded on the Tours page.
 
-## Ticketing API — RECEIVED (Rathin API v2)
+## Brand Assets — Confirmed From Live Site
+These are real asset URLs pulled directly from the reference site. Claude Code
+will have normal internet access when running locally (unlike this planning
+conversation, which is network-sandboxed) — fetch these directly rather than
+recreating them from scratch.
+
+**Logo:**
+`https://pharmachelle-careconnect.vercel.app/assets/logo-DvOSFNyZ.jpg`
+(715x715, alt text: "AGIL Travels")
+
+**Hero image:**
+`https://pharmachelle-careconnect.vercel.app/assets/hero-travel-CkJ6XSdU.jpg`
+(1920x1080, aerial view of airplane over tropical islands)
+
+**Destination images** (used on homepage destination cards):
+- Dubai: `.../assets/dest-dubai-DrZCUUeC.jpg`
+- UK: `.../assets/dest-uk-DZeyDLwf.jpg`
+- Canada: `.../assets/dest-canada-D6j_qE8E.jpg`
+- USA: `.../assets/dest-usa-C2ehAI3v.jpg`
+- South Africa: `.../assets/dest-sa-BVf51U_L.jpg`
+- Turkey: `.../assets/dest-turkey-_ZNEflgm.jpg`
+- Saudi Arabia: `.../assets/dest-saudi-BjuTP4AW.jpg`
+(all under the same `pharmachelle-careconnect.vercel.app/assets/` base path)
+
+**Confirmed brand colors** (pulled from live CSS variables, HSL format):
+- `--primary: 234 75% 30%` — deep navy blue
+- `--accent` / `--secondary: 42 88% 55%` — gold/amber
+- `--background: 0 0% 100%` — white
+- `--foreground: 220 40% 13%` — dark navy (body text)
+
+This confirms a navy-and-gold palette, consistent with Configur's existing
+premium visual style — safe to carry forward into the redesign rather than
+inventing a new palette, unless the client says otherwise.
+
+**Not available from the live site** (ask the client directly if needed):
+favicon (none found), vector/SVG logo source, brand guidelines document, fonts
+in use beyond what's computed at runtime.
+
 
 Client sent Postman docs: https://documenter.getpostman.com/view/32356669/2sB3QJQBKr
 This is a third-party PARK/ATTRACTION ticketing inventory API — not a generic
@@ -203,13 +228,11 @@ client whether ALL tours should come from this live API, or only some
 content as originally planned.
 
 **Auth flow:**
-
 - `GET {{domain}}/api/auth/v2/token` — headers: `ClientId`, `ClientSecret` →
   returns a bearer token
 - All subsequent calls use `Authorization: {{Token}}`
 
 **Endpoints:**
-
 - `POST {{domain}}/api/park/v2/availability/park` — list available
   parks/attractions (filterable, e.g. `status = "Y"`)
 - `POST {{domain}}/api/park/v2/common/search/custTicketType` — ticket types +
@@ -219,7 +242,6 @@ content as originally planned.
   to double as the T&C content endpoint)
 
 **STILL MISSING — ask the client for these before building the integration:**
-
 - Real `ClientId` / `ClientSecret`
 - The actual `{{domain}}` base URL (not in the public doc)
 
@@ -229,7 +251,6 @@ tokens into any code or commit them anywhere — get fresh credentials from the
 client and store them as environment variables, never hardcoded.
 
 ## Open Questions (confirm with client before building)
-
 1. ~~Which countries/visa types at launch~~ — ANSWERED: UAE gets the full
    application flow (96hrs/30-day/60-day, checklists above); UK/US/Schengen/
    other countries get the simple enquiry form (Tier 2). Still worth
@@ -251,7 +272,6 @@ client and store them as environment variables, never hardcoded.
    or embedded on the existing Tours page?
 
 ## Constraints
-
 - Fixed fee project — be mindful of scope creep. Anything not listed as CORE
   above should be flagged to the user before building, not built by default.
 - No mobile app in this phase.
