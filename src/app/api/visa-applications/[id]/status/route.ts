@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { isStaffAuthed } from "@/lib/staff-auth";
+import { getCurrentStaff } from "@/lib/staff";
 import { updateVisaStatus } from "@/lib/visa-db";
 import { VISA_STATUSES } from "@/lib/visa";
 import { sendEmail, visaStatusEmail } from "@/lib/email";
@@ -11,9 +11,16 @@ export async function PATCH(
   request: Request,
   { params }: { params: Promise<{ id: string }> },
 ) {
-  // Staff-only.
-  if (!(await isStaffAuthed())) {
+  // Staff-only, and only those with "manage" permission (or admins).
+  const session = await getCurrentStaff();
+  if (!session) {
     return NextResponse.json({ error: "Unauthorized." }, { status: 401 });
+  }
+  if (!session.profile.can_manage && session.profile.role !== "admin") {
+    return NextResponse.json(
+      { error: "Your account doesn't have permission to change statuses." },
+      { status: 403 },
+    );
   }
 
   const { id } = await params;

@@ -13,13 +13,24 @@ const actions: { status: VisaStatus; className: string }[] = [
 export function StatusControls({
   applicationId,
   current,
+  canManage,
 }: {
   applicationId: string;
   current: VisaStatus;
+  canManage: boolean;
 }) {
   const router = useRouter();
   const [busy, setBusy] = useState<VisaStatus | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  if (!canManage) {
+    return (
+      <p className="text-sm text-brand-500">
+        Your account has view-only access. Ask an administrator for permission to
+        change application statuses.
+      </p>
+    );
+  }
 
   async function setStatus(status: VisaStatus) {
     setBusy(status);

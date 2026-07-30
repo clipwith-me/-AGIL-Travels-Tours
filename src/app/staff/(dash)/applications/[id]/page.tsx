@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getVisaApplication } from "@/lib/visa-db";
 import { getVisaType } from "@/lib/visa";
+import { requireStaff } from "@/lib/staff";
 import { StatusBadge } from "@/components/staff/StatusBadge";
 import { StatusControls } from "@/components/staff/StatusControls";
 
@@ -31,6 +32,7 @@ export default async function ApplicationDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
+  const { profile } = await requireStaff();
   const result = await getVisaApplication(id);
   if (!result) notFound();
   const { application: a, documents } = result;
@@ -112,7 +114,11 @@ export default async function ApplicationDetailPage({
       <div className="mt-5 rounded-2xl border border-brand-100 bg-white p-6">
         <h2 className="text-sm font-semibold text-brand-900">Update status</h2>
         <div className="mt-4">
-          <StatusControls applicationId={a.id} current={a.status} />
+          <StatusControls
+            applicationId={a.id}
+            current={a.status}
+            canManage={profile.can_manage || profile.role === "admin"}
+          />
         </div>
       </div>
     </div>

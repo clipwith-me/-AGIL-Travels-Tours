@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { LoginForm } from "@/components/staff/LoginForm";
-import { isStaffAuthed } from "@/lib/staff-auth";
+import { getCurrentStaff } from "@/lib/staff";
 
 export const metadata: Metadata = {
   title: "Staff sign in",
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default async function StaffLoginPage() {
-  if (await isStaffAuthed()) redirect("/staff");
+  if (await getCurrentStaff()) redirect("/staff");
 
   return (
     <section className="bg-sand-50">
@@ -17,7 +17,7 @@ export default async function StaffLoginPage() {
         <div className="rounded-2xl border border-brand-100 bg-white p-8 shadow-sm">
           <h1 className="text-xl font-bold text-brand-900">Staff dashboard</h1>
           <p className="mt-1 text-sm text-brand-500">
-            Sign in to review UAE visa applications.
+            Sign in with your staff account to review applications.
           </p>
           <div className="mt-6">
             <LoginForm />
