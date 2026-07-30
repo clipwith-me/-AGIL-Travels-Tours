@@ -12,8 +12,8 @@ const pillars = [
     body: "Every booking produces a genuine reference number and confirmation — so you always know exactly where your trip stands.",
   },
   {
-    title: "Built for African travellers",
-    body: "We understand the journey from Nigeria and across Africa to the UAE, and we plan around what actually matters for your trip.",
+    title: "Built for travellers everywhere",
+    body: "Wherever you're travelling from, we handle the details that matter and plan your UAE trip around what's important to you.",
   },
 ];
 

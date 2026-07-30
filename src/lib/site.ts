@@ -12,7 +12,7 @@ export const site = {
   shortName: "AGIL Travels",
   tagline: "Your Safety Is Our First Priority.",
   description:
-    "UAE-focused travel agency for Nigerian and African travellers — visa assistance, flights, hotels, transfers, tours, and expert travel consultation.",
+    "UAE travel agency for travellers worldwide — visa assistance, flights, hotels, transfers, tours, and expert travel consultation.",
 
   // TODO(client): confirm the official WhatsApp Business number in E.164 digits
   // (no "+", no spaces). Placeholder below keeps links well-formed until then.
@@ -37,12 +37,17 @@ export function whatsappLink(message?: string): string {
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
 
+/** Build an internal enquiry-form link, optionally preselecting a service. */
+export function enquiryLink(serviceSlug?: string): string {
+  return serviceSlug ? `/enquiry?service=${serviceSlug}` : "/enquiry";
+}
+
 export type NavItem = { label: string; href: string };
 
 export const primaryNav: NavItem[] = [
   { label: "Services", href: "/#services" },
-  { label: "Why AGIL", href: "/#why" },
-  { label: "Tours", href: "/#services" }, // TODO: point to /tours when built (Week 1–2)
-  { label: "FAQ", href: "/#faq" }, // TODO: point to /faq when built (Week 1)
+  { label: "Tours", href: "/tours" },
+  { label: "Transport", href: "/transport" },
+  { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/#contact" },
 ];

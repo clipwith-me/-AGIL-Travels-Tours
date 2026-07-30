@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { primaryNav, site, whatsappLink } from "@/lib/site";
+import { enquiryLink, primaryNav, site } from "@/lib/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -39,16 +39,12 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href={whatsappLink(
-              "Hello AGIL Travels, I'd like to make an enquiry.",
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href={enquiryLink()}
             className="hidden rounded-full bg-gold-500 px-4 py-2 text-sm font-semibold text-brand-950 transition-colors hover:bg-gold-400 sm:inline-block"
           >
-            Enquire on WhatsApp
-          </a>
+            Make an enquiry
+          </Link>
 
           {/* Mobile toggle */}
           <button
@@ -90,17 +86,13 @@ export function Header() {
                 {item.label}
               </Link>
             ))}
-            <a
-              href={whatsappLink(
-                "Hello AGIL Travels, I'd like to make an enquiry.",
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={enquiryLink()}
               onClick={() => setOpen(false)}
               className="mt-2 mb-2 rounded-full bg-gold-500 px-4 py-3 text-center text-sm font-semibold text-brand-950"
             >
-              Enquire on WhatsApp
-            </a>
+              Make an enquiry
+            </Link>
           </div>
         </nav>
       )}

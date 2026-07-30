@@ -1,36 +1,12 @@
 import Link from "next/link";
 import { services, type Service } from "@/lib/services";
-import { whatsappLink } from "@/lib/site";
 
 function ServiceCard({ service }: { service: Service }) {
-  const isWhatsapp = service.funnel === "whatsapp";
-  const href = isWhatsapp
-    ? whatsappLink(`Hello AGIL Travels, I'd like help with ${service.title}.`)
-    : service.href ?? "/#services";
-
-  const ctaLabel = isWhatsapp ? "Enquire" : "View options";
-  const ctaClass =
-    "mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 transition-colors hover:text-brand-900";
-
-  const arrow = (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="transition-transform group-hover:translate-x-0.5"
-      aria-hidden
-    >
-      <path d="M5 12h14M12 5l7 7-7 7" />
-    </svg>
-  );
-
   return (
-    <article className="group flex flex-col rounded-2xl border border-brand-100 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-md">
+    <Link
+      href={`/services/${service.slug}`}
+      className="group flex flex-col rounded-2xl border border-brand-100 bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-md"
+    >
       <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand-700 transition-colors group-hover:bg-brand-800 group-hover:text-gold-400">
         {service.icon}
       </span>
@@ -42,23 +18,24 @@ function ServiceCard({ service }: { service: Service }) {
         {service.blurb}
       </p>
 
-      {isWhatsapp ? (
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={ctaClass}
+      <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 transition-colors group-hover:text-brand-900">
+        Learn more
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="transition-transform group-hover:translate-x-0.5"
+          aria-hidden
         >
-          {ctaLabel}
-          {arrow}
-        </a>
-      ) : (
-        <Link href={href} className={ctaClass}>
-          {ctaLabel}
-          {arrow}
-        </Link>
-      )}
-    </article>
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </span>
+    </Link>
   );
 }
 

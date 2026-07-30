@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { site, whatsappLink } from "@/lib/site";
+import { enquiryLink, site } from "@/lib/site";
 
 export function Hero() {
   return (
@@ -25,21 +25,17 @@ export function Hero() {
 
         <p className="mt-6 max-w-2xl text-lg leading-8 text-brand-100">
           {site.name} handles your visa, flights, hotels, transfers, and tours —
-          end to end. One trusted team for Nigerian and African travellers
-          heading to the UAE.
+          end to end. One trusted team for travellers heading to the UAE from
+          anywhere in the world.
         </p>
 
         <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-          <a
-            href={whatsappLink(
-              "Hello AGIL Travels, I'd like to plan a trip to the UAE.",
-            )}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href={enquiryLink()}
             className="inline-flex items-center justify-center rounded-full bg-gold-500 px-7 py-3.5 text-base font-semibold text-brand-950 shadow-lg shadow-gold-500/20 transition-colors hover:bg-gold-400"
           >
             Plan your trip
-          </a>
+          </Link>
           <Link
             href="/#services"
             className="inline-flex items-center justify-center rounded-full border border-white/20 px-7 py-3.5 text-base font-semibold text-white transition-colors hover:bg-white/10"
