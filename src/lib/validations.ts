@@ -35,3 +35,18 @@ export const tourEnquirySchema = z.object({
 });
 
 export type TourEnquiryInput = z.infer<typeof tourEnquirySchema>;
+
+export const createPaymentSchema = z.object({
+  provider: z.enum(["stripe", "ziina"]),
+  // Minor units (cents / fils). Guard against absurd values.
+  amount: z.coerce.number().int().min(1).max(100_000_000),
+  currency: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .regex(/^[a-z]{3}$/, "Currency must be a 3-letter code."),
+  description: z.string().trim().min(1).max(300),
+  customerEmail: z.string().trim().email().optional().or(z.literal("")),
+});
+
+export type CreatePaymentBody = z.infer<typeof createPaymentSchema>;
