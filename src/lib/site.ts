@@ -48,6 +48,7 @@ export const primaryNav: NavItem[] = [
   { label: "Services", href: "/#services" },
   { label: "Tours", href: "/tours" },
   { label: "Transport", href: "/transport" },
+  { label: "About", href: "/about" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/#contact" },
 ];

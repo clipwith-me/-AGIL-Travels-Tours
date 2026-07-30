@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { enquiryLink, primaryNav, site } from "@/lib/site";
+import { enquiryLink, primaryNav } from "@/lib/site";
+import { Logo } from "@/components/brand/Logo";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -11,19 +12,7 @@ export function Header() {
     <header className="sticky top-0 z-50 border-b border-brand-100 bg-white/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
         {/* Brand */}
-        <Link href="/" className="flex items-center gap-2" aria-label={site.name}>
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-800 font-bold text-gold-400">
-            A
-          </span>
-          <span className="flex flex-col leading-none">
-            <span className="text-sm font-bold tracking-tight text-brand-900">
-              AGIL
-            </span>
-            <span className="text-[10px] font-medium uppercase tracking-widest text-brand-500">
-              Travels &amp; Tours
-            </span>
-          </span>
-        </Link>
+        <Logo variant="dark" />
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-7 md:flex">

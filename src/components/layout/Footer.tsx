@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { primaryNav, site, whatsappLink } from "@/lib/site";
 import { services } from "@/lib/services";
+import { Logo } from "@/components/brand/Logo";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -10,14 +11,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
         {/* Brand + tagline */}
         <div className="md:col-span-1">
-          <div className="flex items-center gap-2">
-            <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white/10 font-bold text-gold-400">
-              A
-            </span>
-            <span className="text-base font-bold tracking-tight text-white">
-              AGIL Travels &amp; Tours
-            </span>
-          </div>
+          <Logo variant="light" />
           <p className="mt-4 text-sm text-gold-300">{site.tagline}</p>
           <p className="mt-3 text-sm text-brand-200">{site.description}</p>
         </div>

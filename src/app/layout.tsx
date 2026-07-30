@@ -16,11 +16,36 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3004",
+  ),
   title: {
     default: `${site.name} — ${site.tagline}`,
     template: `%s — ${site.name}`,
   },
   description: site.description,
+  keywords: [
+    "UAE travel agency",
+    "Dubai tours",
+    "UAE visa assistance",
+    "flight booking",
+    "hotel reservations",
+    "airport transfers",
+    "desert safari",
+    "AGIL Travels",
+  ],
+  openGraph: {
+    type: "website",
+    siteName: site.name,
+    title: `${site.name} — ${site.tagline}`,
+    description: site.description,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} — ${site.tagline}`,
+    description: site.description,
+  },
 };
 
 export default function RootLayout({
