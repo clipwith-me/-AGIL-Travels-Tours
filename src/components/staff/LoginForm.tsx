@@ -1,14 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { createSupabaseBrowserAuth } from "@/lib/supabase-auth-browser";
 
 const fieldClass =
   "mt-1.5 w-full rounded-lg border border-brand-200 bg-white px-3.5 py-2.5 text-sm text-brand-900 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20";
 
 export function LoginForm() {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -28,8 +26,8 @@ export function LoginForm() {
         setError("Incorrect email or password.");
         return;
       }
-      router.replace("/staff");
-      router.refresh();
+      // Full-page navigation so the server picks up the fresh session cookie.
+      window.location.href = "/staff";
     } catch {
       setError("Something went wrong. Please try again.");
     } finally {
