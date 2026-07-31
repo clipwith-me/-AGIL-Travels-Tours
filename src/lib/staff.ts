@@ -25,36 +25,48 @@ export async function getCurrentStaff(): Promise<StaffSession | null> {
   } = await supabase.auth.getUser();
   if (!user || !user.email) return null;
 
-  const admin = getSupabaseAdmin();
-  const { data: existing } = await admin
-    .from("staff_users")
-    .select("id, email, full_name, role, can_manage, active")
-    .eq("id", user.id)
-    .maybeSingle();
+  try {
+    const admin = getSupabaseAdmin();
+    const { data: existing, error } = await admin
+      .from("staff_users")
+      .select("id, email, full_name, role, can_manage, active")
+      .eq("id", user.id)
+      .maybeSingle();
+    if (error) throw error;
 
-  let profile = existing as StaffProfile | null;
+    let profile = existing as StaffProfile | null;
 
-  // Bootstrap: the ADMIN_EMAIL becomes an admin automatically on first login.
-  if (!profile) {
-    const adminEmail = (process.env.ADMIN_EMAIL ?? "").toLowerCase();
-    if (adminEmail && user.email.toLowerCase() === adminEmail) {
-      const seed = {
-        id: user.id,
-        email: user.email,
-        full_name: "Administrator",
-        role: "admin" as const,
-        can_manage: true,
-        active: true,
-      };
-      await admin.from("staff_users").insert(seed);
-      profile = seed;
-    } else {
-      return null; // Authenticated but not a registered staff member.
+    // Bootstrap: the ADMIN_EMAIL becomes an admin automatically on first login.
+    if (!profile) {
+      const adminEmail = (process.env.ADMIN_EMAIL ?? "").toLowerCase();
+      if (adminEmail && user.email.toLowerCase() === adminEmail) {
+        const seed = {
+          id: user.id,
+          email: user.email,
+          full_name: "Administrator",
+          role: "admin" as const,
+          can_manage: true,
+          active: true,
+        };
+        const { error: insertError } = await admin.from("staff_users").insert(seed);
+        if (insertError) throw insertError;
+        profile = seed;
+      } else {
+        return null; // Authenticated but not a registered staff member.
+      }
     }
-  }
 
-  if (!profile.active) return null;
-  return { userId: user.id, email: user.email, profile };
+    if (!profile.active) return null;
+    return { userId: user.id, email: user.email, profile };
+  } catch (err) {
+    // Misconfiguration (missing service key / tables not created / DB down):
+    // fail closed rather than crashing the whole render.
+    console.error(
+      "getCurrentStaff failed — check SUPABASE_SERVICE_ROLE_KEY, ADMIN_EMAIL, and that 003_staff_auth.sql has been run:",
+      err,
+    );
+    return null;
+  }
 }
 
 export async function requireStaff(): Promise<StaffSession> {
