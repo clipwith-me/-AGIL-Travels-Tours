@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { redirect } from "next/navigation";
 import { createSupabaseServerAuth } from "./supabase-auth-server";
 import { getSupabaseAdmin } from "./supabase";
@@ -18,7 +19,7 @@ export type StaffSession = { userId: string; email: string; profile: StaffProfil
  * Returns the signed-in staff member (with role/permission) or null.
  * The designated ADMIN_EMAIL is auto-provisioned as an admin on first login.
  */
-export async function getCurrentStaff(): Promise<StaffSession | null> {
+export const getCurrentStaff = cache(async (): Promise<StaffSession | null> => {
   const supabase = await createSupabaseServerAuth();
   const {
     data: { user },
@@ -67,7 +68,7 @@ export async function getCurrentStaff(): Promise<StaffSession | null> {
     );
     return null;
   }
-}
+});
 
 export async function requireStaff(): Promise<StaffSession> {
   const session = await getCurrentStaff();
