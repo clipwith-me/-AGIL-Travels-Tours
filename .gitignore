@@ -35,6 +35,9 @@ yarn-error.log*
 # ...but keep the committed template
 !.env.example
 
+# scratch/one-off scripts
+_*.mjs
+
 # vercel
 .vercel
 
