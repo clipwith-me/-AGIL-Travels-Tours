@@ -17,6 +17,18 @@ export default async function StaffDashLayout({
             <Link href="/staff" className="text-sm font-bold text-brand-900">
               AGIL · Staff
             </Link>
+            <Link
+              href="/staff"
+              className="text-sm font-medium text-brand-600 hover:text-brand-900"
+            >
+              Applications
+            </Link>
+            <Link
+              href="/staff/enquiries"
+              className="text-sm font-medium text-brand-600 hover:text-brand-900"
+            >
+              Enquiries
+            </Link>
             {profile.role === "admin" && (
               <Link
                 href="/staff/users"
