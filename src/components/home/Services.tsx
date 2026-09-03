@@ -51,8 +51,9 @@ export function Services() {
             Six services, one trusted team
           </h2>
           <p className="mt-4 text-lg leading-8 text-brand-500">
-            From your visa to your final excursion, AGIL handles every part of
-            your UAE trip — so you travel safely and stress-free.
+            From visas and flights anywhere in the world to unforgettable UAE
+            tours, AGIL handles every part of your journey — so you travel
+            safely and stress-free.
           </p>
         </div>
 

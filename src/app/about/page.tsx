@@ -7,7 +7,7 @@ import { services } from "@/lib/services";
 export const metadata: Metadata = {
   title: "About us",
   description:
-    "AGIL Travels and Tours is a UAE travel agency built around one promise: your safety is our first priority.",
+    "AGIL Travels and Tours is a worldwide travel agency based in Dubai, built around one promise: your safety is our first priority.",
 };
 
 const values = [
@@ -38,15 +38,17 @@ export default function AboutPage() {
         <div className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
           <div className="prose-none space-y-5 text-base leading-7 text-brand-600">
             <p>
-              {site.name} is a UAE-focused travel agency helping travellers from
-              around the world plan safe, well-organised trips to the Emirates.
-              From your visa through to your final excursion, we handle the moving
-              parts so you can focus on the journey.
+              {site.name} is a worldwide travel agency, headquartered in Dubai,
+              helping travellers everywhere plan safe, well-organised trips. We
+              arrange visas, flights, and hotels to destinations across the globe
+              — and, on home ground, curated tours across the UAE. From your
+              first enquiry to your return, we handle the moving parts so you can
+              focus on the journey.
             </p>
             <p>
-              We bring together the full trip under one roof — visa assistance,
+              We bring the full trip together under one roof — visa assistance,
               flight bookings, hotel reservations, transfers, tours, and expert
-              travel consultation — with local UAE knowledge behind every
+              travel consultation — with a trusted team behind every
               recommendation.
             </p>
           </div>

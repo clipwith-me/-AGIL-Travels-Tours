@@ -39,7 +39,7 @@ export default function OpengraphImage() {
         {/* Headline */}
         <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
           <span style={{ color: "white", fontSize: 60, fontWeight: 700, lineHeight: 1.1, maxWidth: 900 }}>
-            Travel the Emirates with confidence.
+            Travel the world with confidence.
           </span>
           <span style={{ color: "#e6bd57", fontSize: 38, fontWeight: 600 }}>
             Your Safety Is Our First Priority.

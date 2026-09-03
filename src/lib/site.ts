@@ -12,7 +12,7 @@ export const site = {
   shortName: "AGIL Travels",
   tagline: "Your Safety Is Our First Priority.",
   description:
-    "UAE travel agency for travellers worldwide — visa assistance, flights, hotels, transfers, tours, and expert travel consultation.",
+    "Worldwide travel agency based in Dubai — visa assistance, flight bookings, and hotels to destinations across the globe, plus curated UAE tours and transfers.",
 
   // TODO(client): confirm the official WhatsApp Business number in E.164 digits
   // (no "+", no spaces). Placeholder below keeps links well-formed until then.

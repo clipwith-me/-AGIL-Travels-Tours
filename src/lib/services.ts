@@ -94,7 +94,7 @@ export const services: Service[] = [
     slug: "visa-assistance",
     title: "Visa Assistance",
     blurb:
-      "End-to-end support for UAE and international visas — eligibility checks, document guidance, and application handling from start to approval.",
+      "End-to-end support for visas worldwide — UAE, UK, US, Schengen, Canada and beyond. Eligibility checks, document guidance, and application handling from start to approval.",
     funnel: "catalogue",
     href: "/visa",
     icon: VisaIcon,
@@ -103,7 +103,7 @@ export const services: Service[] = [
     slug: "flight-ticket-booking",
     title: "Flight Ticket Booking",
     blurb:
-      "Competitive fares on flights in and out of the UAE, with routing and dates arranged around your schedule and budget.",
+      "Competitive fares on flights to and from anywhere in the world, with routing and dates arranged around your schedule and budget.",
     funnel: "whatsapp",
     icon: FlightIcon,
   },
@@ -111,7 +111,7 @@ export const services: Service[] = [
     slug: "hotel-reservations",
     title: "Hotel & Apartment Rentals",
     blurb:
-      "Hand-picked hotels and apartments across the Emirates and beyond to match your trip — tell us your dates and we'll find your stay.",
+      "Hand-picked hotels and apartments worldwide to match your trip — tell us your destination and dates, and we'll find your stay.",
     funnel: "catalogue",
     href: "/hotels",
     icon: HotelIcon,

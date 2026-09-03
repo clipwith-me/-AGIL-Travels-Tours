@@ -105,3 +105,20 @@ export const hotelEnquirySchema = z.object({
 });
 
 export type HotelEnquiryInput = z.infer<typeof hotelEnquirySchema>;
+
+export const quoteRequestSchema = z.object({
+  fullName: z.string().trim().min(2, "Please enter your full name.").max(120),
+  email: z.string().trim().email("Please enter a valid email address."),
+  phone,
+  destination: z.string().trim().max(120).optional().or(z.literal("")),
+  travellers: z.coerce.number().int().min(1).max(50).optional(),
+  nights: z.coerce.number().int().min(0).max(365).optional(),
+  services: z.array(z.enum(["flight", "hotel", "visa", "tour", "transfer"])).max(5),
+  hotelRating: z.string().trim().max(4).optional().or(z.literal("")),
+  tourCategory: z.string().trim().max(40).optional().or(z.literal("")),
+  estimateAed: z.coerce.number().int().min(0).max(100_000_000).optional(),
+  currency: z.enum(["AED", "USD"]).optional(),
+  notes: z.string().trim().max(2000).optional().or(z.literal("")),
+});
+
+export type QuoteRequestInput = z.infer<typeof quoteRequestSchema>;

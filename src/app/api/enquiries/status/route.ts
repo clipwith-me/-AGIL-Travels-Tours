@@ -7,7 +7,7 @@ import {
 } from "@/lib/enquiries-admin";
 
 const schema = z.object({
-  type: z.enum(["visa", "tour", "hotel"]),
+  type: z.enum(["visa", "tour", "hotel", "quote"]),
   id: z.string().uuid(),
   status: z.enum(ENQUIRY_STATUSES),
 });

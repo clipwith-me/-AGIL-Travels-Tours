@@ -9,6 +9,7 @@ const TABLE: Record<EnquiryType, string> = {
   visa: "visa_enquiries",
   tour: "tour_enquiries",
   hotel: "hotel_enquiries",
+  quote: "quote_requests",
 };
 
 export type VisaEnquiryRow = {
@@ -70,9 +71,26 @@ async function listTable<T>(table: string): Promise<T[]> {
   return (data ?? []) as T[];
 }
 
+export type QuoteRequestRow = {
+  id: string;
+  reference: string;
+  full_name: string;
+  email: string;
+  phone: string;
+  destination: string | null;
+  travellers: number | null;
+  nights: number | null;
+  services: string[] | null;
+  estimate_aed: number | null;
+  currency: string | null;
+  status: EnquiryStatus;
+  created_at: string;
+};
+
 export const listVisaEnquiries = () => listTable<VisaEnquiryRow>(TABLE.visa);
 export const listTourEnquiries = () => listTable<TourEnquiryRow>(TABLE.tour);
 export const listHotelEnquiries = () => listTable<HotelEnquiryRow>(TABLE.hotel);
+export const listQuoteRequests = () => listTable<QuoteRequestRow>(TABLE.quote);
 
 export async function updateEnquiryStatus(
   type: EnquiryType,

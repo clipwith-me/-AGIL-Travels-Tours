@@ -4,6 +4,7 @@ import {
   listVisaEnquiries,
   listTourEnquiries,
   listHotelEnquiries,
+  listQuoteRequests,
   type EnquiryType,
 } from "@/lib/enquiries-admin";
 import { EnquiryStatusControl } from "@/components/staff/EnquiryStatusControl";
@@ -61,12 +62,13 @@ const td = "px-4 py-3 align-top";
 export default async function EnquiriesPage() {
   await requireStaff();
 
-  let visa, tour, hotel;
+  let visa, tour, hotel, quotes;
   try {
-    [visa, tour, hotel] = await Promise.all([
+    [visa, tour, hotel, quotes] = await Promise.all([
       listVisaEnquiries(),
       listTourEnquiries(),
       listHotelEnquiries(),
+      listQuoteRequests(),
     ]);
   } catch (err) {
     console.error("enquiries load failed:", err);
@@ -74,8 +76,9 @@ export default async function EnquiriesPage() {
       <div className="rounded-2xl border border-amber-200 bg-amber-50 p-6 text-sm text-amber-800">
         <p className="font-semibold">Couldn&apos;t load enquiries.</p>
         <p className="mt-1">
-          Make sure <code className="rounded bg-amber-100 px-1">schema.sql</code> and{" "}
-          <code className="rounded bg-amber-100 px-1">002_updates.sql</code> have been run.
+          Make sure <code className="rounded bg-amber-100 px-1">schema.sql</code>,{" "}
+          <code className="rounded bg-amber-100 px-1">002_updates.sql</code>, and{" "}
+          <code className="rounded bg-amber-100 px-1">004_quotes.sql</code> have been run.
         </p>
       </div>
     );
@@ -86,6 +89,7 @@ export default async function EnquiriesPage() {
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <h1 className="text-xl font-bold text-brand-900">Enquiries</h1>
         <div className="flex gap-3 text-xs text-brand-500">
+          <a href="#quote" className="hover:text-brand-900">Quotes ({quotes.length})</a>
           <a href="#visa" className="hover:text-brand-900">Visa ({visa.length})</a>
           <a href="#tour" className="hover:text-brand-900">Tours ({tour.length})</a>
           <a href="#hotel" className="hover:text-brand-900">Hotels ({hotel.length})</a>
@@ -97,6 +101,46 @@ export default async function EnquiriesPage() {
       </p>
 
       <div className="mt-8">
+        {/* Quote requests */}
+        <Section title="Instant-quote requests" type="quote" count={quotes.length}>
+          <thead className="border-b border-brand-100 bg-sand-50">
+            <tr>
+              <th className={th}>Contact</th>
+              <th className={th}>Trip</th>
+              <th className={th}>Estimate</th>
+              <th className={th}>Received</th>
+              <th className={th}>Status</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-brand-100">
+            {quotes.length === 0 ? (
+              <tr><td className={td} colSpan={5}><span className="text-brand-400">No quote requests.</span></td></tr>
+            ) : (
+              quotes.map((e) => (
+                <tr key={e.id}>
+                  <td className={td}>
+                    <div className="font-medium text-brand-900">{e.full_name}</div>
+                    <Contact email={e.email} phone={e.phone} />
+                  </td>
+                  <td className={td}>
+                    <div className="text-brand-900">{e.destination || "—"}</div>
+                    <div className="text-xs text-brand-500">
+                      {[
+                        e.travellers ? `${e.travellers} pax` : null,
+                        e.nights ? `${e.nights} nights` : null,
+                        (e.services ?? []).join(", "),
+                      ].filter(Boolean).join(" · ")}
+                    </div>
+                  </td>
+                  <td className={td}>{e.estimate_aed != null ? `AED ${e.estimate_aed.toLocaleString()}` : "—"}</td>
+                  <td className={td}>{new Date(e.created_at).toLocaleDateString()}</td>
+                  <td className={td}><EnquiryStatusControl type="quote" id={e.id} current={e.status} /></td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </Section>
+
         {/* Visa enquiries */}
         <Section title="Visa enquiries" type="visa" count={visa.length}>
           <thead className="border-b border-brand-100 bg-sand-50">

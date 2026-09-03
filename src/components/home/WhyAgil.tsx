@@ -13,7 +13,7 @@ const pillars = [
   },
   {
     title: "Built for travellers everywhere",
-    body: "Wherever you're travelling from, we handle the details that matter and plan your UAE trip around what's important to you.",
+    body: "Wherever you're going, we handle the details that matter and plan your trip around what's important to you.",
   },
 ];
 
@@ -30,7 +30,8 @@ export function WhyAgil() {
               Your safety is our first priority
             </h2>
             <p className="mt-4 text-lg leading-8 text-brand-500">
-              We&apos;re a UAE-focused travel agency built around trust. That
+              We&apos;re a worldwide travel agency, based in Dubai and built
+              around trust. That
               means doing the small things right — confirming every booking,
               answering quickly, and standing behind your trip from planning to
               return.

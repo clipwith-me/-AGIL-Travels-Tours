@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { enquiryLink, primaryNav } from "@/lib/site";
+import { primaryNav } from "@/lib/site";
 import { Logo } from "@/components/brand/Logo";
 
 export function Header() {
@@ -29,10 +29,10 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <Link
-            href={enquiryLink()}
+            href="/quote"
             className="hidden rounded-full bg-gold-500 px-4 py-2 text-sm font-semibold text-brand-950 transition-colors hover:bg-gold-400 sm:inline-block"
           >
-            Make an enquiry
+            Get a quote
           </Link>
 
           {/* Mobile toggle */}
@@ -76,11 +76,11 @@ export function Header() {
               </Link>
             ))}
             <Link
-              href={enquiryLink()}
+              href="/quote"
               onClick={() => setOpen(false)}
               className="mt-2 mb-2 rounded-full bg-gold-500 px-4 py-3 text-center text-sm font-semibold text-brand-950"
             >
-              Make an enquiry
+              Get a quote
             </Link>
           </div>
         </nav>
