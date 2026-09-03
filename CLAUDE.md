@@ -106,7 +106,7 @@ payment but never confirms anything afterward; don't repeat that.
 | Correct routing/deployment config from the start (see pitfall above) | CORE | 1 |
 | FAQ page (categorised: Visa, Flights, Hotels, Tours, Payments, General) | CORE | 1 |
 | Enquiry form + budget-range field (WhatsApp funnel) | CORE | 1 |
-| Stripe + Ziina payment, both live | CORE | 1–2 |
+| Stripe + Ziina + Tabby payment, all live (Tabby is sandbox-only until their team approves) | CORE | 1–2 |
 | UAE visa application form + document upload + email confirmation (full flow — see Visa Flow section) | CORE | 2 |
 | Simple enquiry form for UK/US/Schengen/other country visas (see Visa Flow section) | CORE | 1–2 |
 | Staff status dashboard (Approve/Decline/Under Review for UAE applications + auto-email) | CORE | 2 |
@@ -215,6 +215,31 @@ inventing a new palette, unless the client says otherwise.
 **Not available from the live site** (ask the client directly if needed):
 favicon (none found), vector/SVG logo source, brand guidelines document, fonts
 in use beyond what's computed at runtime.
+
+## Payment: Tabby (BNPL) — NEW, added mid-build
+The client added a third payment method: Tabby, a UAE "Pay in 4" buy-now-pay-later
+provider, alongside Stripe and Ziina. This was not in the original scope — note
+that three payment gateways is more surface area (webhooks, failure handling)
+than the two originally priced.
+
+Docs:
+- API guide: https://docs.tabby.ai/pay-in-4-custom-integration
+- Marketing toolkit: https://docs.tabby.ai/marketing/toolkit
+- Testing guidelines: https://docs.tabby.ai/testing-guidelines
+- Full testing checklist: https://docs.tabby.ai/pay-in-4-custom-integration/full-testing-checklist
+- FAQ: https://docs.tabby.ai/introduction/faq
+- Status page: https://www.tabby-status.com/
+
+Sandbox credentials (test only). The real key values live in `.env.local`
+(gitignored) — NEVER commit them. Documented here by env-var name only:
+- Public key → env `NEXT_PUBLIC_TABBY_PUBLIC_KEY` (value starts `pk_test_…`)
+- Secret key → env `TABBY_SECRET_KEY` (value starts `sk_test_…`)
+- Merchant Code → env `TABBY_MERCHANT_CODE` (`ATPLS`)
+
+**Important:** sandbox/test keys only. Tabby requires their team (contact: Ahmed
+Zia) to review and approve the integration before issuing production keys — build
+and test against sandbox first, budget time for their review. Confirmed scope:
+Website only, no mobile app.
 
 
 Client sent Postman docs: https://documenter.getpostman.com/view/32356669/2sB3QJQBKr

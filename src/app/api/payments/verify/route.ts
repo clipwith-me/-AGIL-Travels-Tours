@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getPayment, setPaymentStatus } from "@/lib/payments/db";
 import { getZiinaStatus } from "@/lib/payments/ziina";
+import { finalizeTabbyPayment } from "@/lib/payments/tabby";
 import { isSupabaseConfigured } from "@/lib/supabase";
 
 /**
@@ -26,8 +27,12 @@ export async function GET(request: Request) {
     }
 
     let status = payment.status;
-    if (payment.provider === "ziina" && payment.provider_ref && status === "pending") {
-      status = await getZiinaStatus(payment.provider_ref);
+    if (payment.provider_ref && status === "pending") {
+      if (payment.provider === "ziina") {
+        status = await getZiinaStatus(payment.provider_ref);
+      } else if (payment.provider === "tabby") {
+        status = await finalizeTabbyPayment(payment.provider_ref, payment.amount);
+      }
       if (status !== payment.status) await setPaymentStatus(reference, status);
     }
 
