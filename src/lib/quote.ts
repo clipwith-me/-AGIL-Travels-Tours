@@ -11,7 +11,7 @@
 export type ServiceKey = "flight" | "hotel" | "visa" | "tour" | "transfer";
 
 export const SERVICES: { key: ServiceKey; label: string; note: string }[] = [
-  { key: "flight", label: "Flights", note: "Return flight, per traveller" },
+  { key: "flight", label: "Flights", note: "From, per traveller (varies by destination)" },
   { key: "hotel", label: "Hotel", note: "Per room, per night" },
   { key: "visa", label: "Visa", note: "Our service fee, per applicant" },
   { key: "tour", label: "UAE tour", note: "Per traveller" },
@@ -29,23 +29,28 @@ export const TOUR_OPTIONS: { value: string; label: string }[] = [
   { value: "nature-wildlife", label: "Nature & Wildlife" },
 ];
 
-// --- PLACEHOLDER RATES (AED) — client to confirm ---------------------------
+// --- RATES (AED) — client-provided "from" lows (13/08/2026) ----------------
+// Client-confirmed lows: flight from 2000; 3★ 300 / 4★ 500 (festive periods
+// higher); visa 350 (Dubai); desert safari 150; boat cruise 95; sightseeing
+// 105; water/theme parks 250; airport transfer 150.
+// NOT provided by client → sensible estimates, flagged: 5★ hotel, Adventure,
+// Nature & Wildlife tour categories. Confirm these three with the client.
 export const QUOTE_RATES = {
-  flightPerTraveller: 1800, // indicative economy return
-  hotelNightly: { "3": 280, "4": 520, "5": 950 } as Record<HotelRating, number>,
+  flightPerTraveller: 2000, // "from" — varies by destination
+  hotelNightly: { "3": 300, "4": 500, "5": 900 } as Record<HotelRating, number>, // 5★ = estimate
   visaPerApplicant: 350, // AGIL service fee (excludes government/embassy fees)
   tourPerTraveller: {
-    "desert-safari": 210,
-    landmarks: 90,
-    "theme-parks": 320,
-    cruises: 260,
-    adventure: 300,
-    "nature-wildlife": 180,
+    "desert-safari": 150,
+    landmarks: 105, // sightseeing
+    "theme-parks": 250, // water parks / theme parks
+    cruises: 95, // boat cruise
+    adventure: 150, // estimate — not provided
+    "nature-wildlife": 150, // estimate — not provided
   } as Record<string, number>,
   transferFlat: 150,
 };
 
-export const AED_PER_USD = 3.67;
+export const AED_PER_USD = 3.66;
 
 export type QuoteInput = {
   travellers: number;
