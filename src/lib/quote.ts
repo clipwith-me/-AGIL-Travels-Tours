@@ -22,8 +22,9 @@ export type HotelRating = "3" | "4" | "5";
 
 export const TOUR_OPTIONS: { value: string; label: string }[] = [
   { value: "desert-safari", label: "Desert Safari" },
-  { value: "landmarks", label: "Landmarks" },
-  { value: "theme-parks", label: "Theme Parks" },
+  { value: "city-tour", label: "City Tour" },
+  { value: "landmarks", label: "Landmarks / Sightseeing" },
+  { value: "theme-parks", label: "Theme & Water Parks" },
   { value: "cruises", label: "Cruises" },
   { value: "adventure", label: "Adventure" },
   { value: "nature-wildlife", label: "Nature & Wildlife" },
@@ -41,6 +42,7 @@ export const QUOTE_RATES = {
   visaPerApplicant: 350, // AGIL service fee (excludes government/embassy fees)
   tourPerTraveller: {
     "desert-safari": 150,
+    "city-tour": 500, // client-provided
     landmarks: 105, // sightseeing
     "theme-parks": 250, // water parks / theme parks
     cruises: 95, // boat cruise
