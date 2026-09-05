@@ -73,7 +73,9 @@ export async function POST(request: Request) {
     reference,
   };
 
-  const origin = new URL(request.url).origin;
+  // Prefer the configured canonical site URL (reliable on Vercel) over the
+  // request origin, which can be an internal host behind the platform proxy.
+  const origin = (process.env.NEXT_PUBLIC_SITE_URL || new URL(request.url).origin).replace(/\/$/, "");
   const urls = {
     successUrl: `${origin}/checkout/success`,
     cancelUrl: `${origin}/checkout/cancel`,
