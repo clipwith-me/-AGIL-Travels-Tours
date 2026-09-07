@@ -4,6 +4,7 @@ import {
   createPaymentRecord,
   makePaymentReference,
   setPaymentProviderRef,
+  setPaymentStatus,
 } from "@/lib/payments/db";
 import { createStripeCheckout, isStripeConfigured } from "@/lib/payments/stripe";
 import { createZiinaPayment, isZiinaConfigured } from "@/lib/payments/ziina";
@@ -81,8 +82,10 @@ export async function POST(request: Request) {
     cancelUrl: `${origin}/checkout/cancel`,
   };
 
+  let recordCreated = false;
   try {
     await createPaymentRecord(input);
+    recordCreated = true;
     const result =
       provider === "stripe"
         ? await createStripeCheckout(input, urls)
@@ -94,6 +97,10 @@ export async function POST(request: Request) {
     return NextResponse.json({ url: result.url, reference }, { status: 201 });
   } catch (err) {
     console.error("payment create failed:", err);
+    // Don't leave an orphaned "pending" row if the provider checkout failed.
+    if (recordCreated) {
+      await setPaymentStatus(reference, "failed").catch(() => {});
+    }
     return NextResponse.json(
       { error: "Could not start the payment. Please try again." },
       { status: 500 },
